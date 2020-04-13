@@ -14,11 +14,11 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: '/tmp/BUILD_NUMBER', description: '', name: 'Build Path', trim: true
+                    string defaultValue: '$WORKSPACE/BUILD_ID', description: '', name: 'BUILD', trim: true
                   }
             }
             steps {
-                echo " ${Build Path} "
+                echo '${BUILD}'
             }
         }
     }
