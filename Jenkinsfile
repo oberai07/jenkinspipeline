@@ -10,11 +10,13 @@ pipeline {
             }
         }
         stage ('Save Build') {
-            input {
-              message 'Enter Path to saver builds?'
-              parameters {
-                string defaultValue: '/tmp/BUILD_NUMBER', description: '', name: 'Build Path', trim: true
-              }
+            steps {
+                input {
+                  message 'Enter Path to saver builds?'
+                  parameters {
+                    string defaultValue: '/tmp/BUILD_NUMBER', description: '', name: 'Build Path', trim: true
+                  }
+                }
             }
         }
     }
