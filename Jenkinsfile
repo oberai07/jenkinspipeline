@@ -18,7 +18,7 @@ pipeline {
                   }
             }
             steps {
-                echo '${BUILD}'
+                echo "${BUILD}"
             }
         }
     }
