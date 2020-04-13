@@ -10,14 +10,15 @@ pipeline {
             }
         }
         stage ('Save Build') {
-            steps {
-                input {
-                  message 'Enter Path to saver builds?'
+            input {
+                  message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
                     string defaultValue: '/tmp/BUILD_NUMBER', description: '', name: 'Build Path', trim: true
                   }
-                }
+            }
+            steps {
+                echo " ${BUILD PATH} "
             }
         }
     }
