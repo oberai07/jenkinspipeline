@@ -13,6 +13,7 @@ pipeline {
             steps {
                 input {
                   message 'Enter Path to saver builds?'
+                  ok "Yes"
                   parameters {
                     string defaultValue: '/tmp/BUILD_NUMBER', description: '', name: 'Build Path', trim: true
                   }
