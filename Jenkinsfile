@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-      BUILD_PATH = "$WORKSPACE/repo-BUILD_ID"
+      BUILD_PATH = "$WORKSPACE/repo-"${BUILD_ID}""
     }
     options {
         timestamps()
@@ -21,7 +21,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo 'Deploy'
+                sh 'git pull origin master'
             }
         }
         stage ('Save Build') {
@@ -29,7 +29,7 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: '$WORKSPACE/BUILD_ID', description: '', name: 'BUILD', trim: true
+                    string defaultValue: '${BUILD_PATH}', description: '', name: 'BUILD', trim: true
                   }
             }
             steps {
