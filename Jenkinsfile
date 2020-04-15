@@ -29,7 +29,7 @@ pipeline {
                   }
             }
             steps {
-                sh 'echo "${env.WORKSPACE}/BuildNo.${env.BUILD_ID}-${env.BUILD_TIMESTAMP}"'
+                sh 'echo "${env.WORKSPACE}/BuildNo.${env.BUILD_ID}-`date`'
             }
 
         }
