@@ -3,7 +3,6 @@ pipeline {
     options {
         timestamps()
     }
-
     triggers {
       pollSCM '* * * * *'
     }
@@ -26,11 +25,11 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: '$WORKSPACE/BuildNo.$BUILD_ID-"$BUILD_TIMESTAMP"', description: '', name: 'SAVE-BUILD', trim: true
+                    string defaultValue: '$WORKSPACE/BuildNo.$BUILD_ID-"$BUILD_TIMESTAMP"', description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
                   }
             }
             steps {
-                echo "${SAVE-BUILD}"
+                echo "${SAVE}"
             }
 
         }
