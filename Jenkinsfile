@@ -14,7 +14,6 @@ pipeline {
         stage ('checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://gitlab.com/kagarwal0205/sampleproject.git']]])
-                sh 'javac -cp '
             }
         }
         stage ('Build & Deploy'){
