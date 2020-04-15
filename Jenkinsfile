@@ -25,11 +25,11 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: '${env.WORKSPACE}/BuildNo.${env.BUILD_ID}-"${env.BUILD_TIMESTAMP}"', description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
+                    string defaultValue: '${env.WORKSPACE}/BuildNo.${env.BUILD_ID}', description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
                   }
             }
             steps {
-                sh 'echo "${env.WORKSPACE}/BuildNo.${env.BUILD_ID}-`date`'
+                sh 'echo ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}'
             }
 
         }
