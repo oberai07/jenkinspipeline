@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-      BUILD_PATH = "$WORKSPACE/repo_"$BUILD_ID""
+      BUILD_PATH = "$WORKSPACE/repo-BUILD_ID"
     }
     options {
         timestamps()
