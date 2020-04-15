@@ -29,7 +29,7 @@ pipeline {
                   }
             }
             steps {
-                echo "${SAVE}"
+                sh 'echo "${SAVE}"'
             }
 
         }
