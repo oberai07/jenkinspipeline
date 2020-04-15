@@ -1,5 +1,12 @@
 pipeline {
     agent any
+    environment {
+      BUILD_PATH = "$WORKSPACE/repo_BUILD_ID"
+    }
+    options {
+        timestamps()
+    }
+
     triggers {
       pollSCM '* * * * *'
     }
@@ -18,7 +25,7 @@ pipeline {
                   }
             }
             steps {
-                echo "${BUILD}"
+                echo "${BUILD_ID}"
             }
         }
     }
