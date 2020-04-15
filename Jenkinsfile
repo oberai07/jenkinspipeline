@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-      BUILD_PATH = "$WORKSPACE/repo_BUILD_ID"
+      BUILD_PATH = "$WORKSPACE/repo_"$BUILD_ID""
     }
     options {
         timestamps()
@@ -11,9 +11,18 @@ pipeline {
       pollSCM '* * * * *'
     }
     stages {
-        stage ('Checkout') {
+        stage ('checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://gitlab.com/kagarwal0205/sampleproject.git']]])
+                sh 'javac -cp '
+            }
+        }
+        stage ('Build & Deploy'){
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploy'
             }
         }
         stage ('Save Build') {
@@ -25,8 +34,10 @@ pipeline {
                   }
             }
             steps {
-                echo "${BUILD_ID}"
+                echo "${BUILD_PATH}"
+                echo "${BUILD}"
             }
+
         }
     }
 }
