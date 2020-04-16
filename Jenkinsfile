@@ -16,6 +16,8 @@ pipeline {
             }
             steps {
                 sh 'git pull origin master'
+                sh 'chmod +x ./script.sh'
+                sh './changes.sh'
             }
         }
         stage ('Save Build') {
