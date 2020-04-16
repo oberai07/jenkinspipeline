@@ -16,7 +16,7 @@ pipeline {
             }
             steps {
                 sh 'git pull origin master'
-                sh 'chmod +x ./script.sh'
+                sh 'chmod +x ./changes.sh'
                 sh './changes.sh'
             }
         }
