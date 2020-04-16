@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        BRANCH_NAME = 'master'
+    }
     options {
         timestamps()
     }
@@ -7,11 +10,6 @@ pipeline {
       pollSCM '* * * * *'
     }
     stages {
-        stage ('checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://gitlab.com/kagarwal0205/sampleproject.git']]])
-            }
-        }
         stage ('Build & Deploy'){
             when {
                 branch 'master'
@@ -25,11 +23,11 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: '${env.WORKSPACE}/BuildNo.${env.BUILD_ID}', description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
+                    string defaultValue: " Path ${env.WORKSPACE}/BuildNo.${env.BUILD_ID} ", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
                   }
             }
             steps {
-                sh 'echo ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}'
+                sh "echo ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}"
             }
 
         }
