@@ -16,6 +16,8 @@ pipeline {
             }
             steps {
                 sh 'git pull origin master'
+                git 'https://gitlab.com/kagarwal0205/sampleproject'
+                lastChanges since: 'LAST_SUCCESSFUL_BUILD', format:'SIDE',matching: 'LINE'
                 sh 'chmod +x ./changes.sh'
                 sh './changes.sh'
             }
