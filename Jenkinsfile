@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        BRANCH_NAME = 'master'
-    }
     options {
         timestamps()
     }
@@ -10,13 +7,9 @@ pipeline {
       pollSCM '* * * * *'
     }
     stages {
-        stage ('Build & Deploy'){
-            when {
-                branch 'master'
-            }
-            steps {
-                sh 'chmod +x ./changes.sh'
-                sh './changes.sh'
+        stage ('Checkout'){
+           steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/oberai07/jenkinspipeline.git']]])
             }
         }
         stage ('Save Build') {
@@ -28,8 +21,8 @@ pipeline {
                   }
             }
             steps {
-                sh "echo ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}"
-                sh "mkdir ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}"
+                sh 'chmod +x ./changes.sh'
+                sh './changes.sh'
             }
 
         }
