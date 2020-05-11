@@ -29,6 +29,7 @@ pipeline {
             }
             steps {
                 sh "echo ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}"
+                sh "mkdir ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}"
             }
 
         }
