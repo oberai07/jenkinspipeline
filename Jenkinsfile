@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    options {
-        timestamps()
-    }
     environment {
         SAVEDIR = '/root/output'
+    }
+    options {
+        timestamps()
     }
     triggers {
       pollSCM '* * * * *'
