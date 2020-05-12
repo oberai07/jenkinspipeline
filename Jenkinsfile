@@ -4,7 +4,7 @@ pipeline {
         timestamps()
     }
     environment {
-        SAVEDIR = /root/output
+        SAVEDIR = '/root/output'
     }
     triggers {
       pollSCM '* * * * *'
