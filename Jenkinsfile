@@ -3,6 +3,9 @@ pipeline {
     options {
         timestamps()
     }
+    environment {
+        SAVEDIR = /root/output
+    }
     triggers {
       pollSCM '* * * * *'
     }
@@ -17,7 +20,7 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: "${env.WORKSPACE}/BuildNo.${env.BUILD_ID}", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
+                    string defaultValue: "${SAVEDIR}/BuildNo.${env.BUILD_ID}", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
                   }
             }
             steps {
