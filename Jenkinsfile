@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SAVEDIR = '/root/output'
+        SAVE_DIR = '/root/output'
     }
     options {
         timestamps()
@@ -13,6 +13,7 @@ pipeline {
         stage ('Checkout'){
            steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/oberai07/jenkinspipeline.git']]])
+                echo env.SAVE_DIR
             }
         }
         stage ('Save Build') {
@@ -20,11 +21,11 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: "${env.SAVEDIR}/BuildNo.${env.BUILD_ID}", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
+                    string defaultValue: "", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
                   }
             }
             steps {
-                sh ' mkdir $SAVE '
+                sh ' echo $SAVE '
             }
         }
     }
