@@ -17,14 +17,12 @@ pipeline {
                   message 'Enter Path to save build?'
                   ok "Yes"
                   parameters {
-                    string defaultValue: "mkdir ${env.WORKSPACE}/BuildNo.${env.BUILD_ID}", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
+                    string defaultValue: "${env.WORKSPACE}/BuildNo.${env.BUILD_ID}", description: 'Path to save the builds with timestamps', name: 'SAVE', trim: true
                   }
             }
             steps {
-                sh 'chmod +x ./changes.sh'
-                sh './changes.sh'
+                sh ' mkdir $SAVE '
             }
-
         }
     }
 }
